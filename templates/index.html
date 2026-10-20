@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phishing URL Detector</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            padding: 40px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #172554;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            overflow-wrap: anywhere;
+        }
+
+        .warning {
+            margin-top: 25px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🛡️ Phishing URL Detector</h1>
+
+        <p>
+            Enter a URL to analyse its characteristics using
+            a machine learning model.
+        </p>
+
+        <form method="POST">
+            <input
+                type="text"
+                name="url"
+                placeholder="Enter a URL"
+                value="{{ submitted_url }}"
+                required
+            >
+
+            <button type="submit">Check URL</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <strong>Submitted URL:</strong>
+            <p>{{ submitted_url }}</p>
+
+            <strong>Prediction:</strong>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <p class="warning">
+            Educational demonstration only. Predictions may be incorrect.
+            Do not rely on this tool alone to determine website safety.
+        </p>
+    </div>
+</body>
+</html>
